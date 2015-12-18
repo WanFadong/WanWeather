@@ -10,6 +10,8 @@ import com.somewan.wanwea.domin.Province;
 import com.somewan.wanwea.service.WeatherService;
 
 public class WeatherServiceImpl implements WeatherService {
+	private final String defaultCountyWeatherCode = "101010100";
+
 	private ProvinceDao provinceDao;
 	private CityDao cityDao;
 	private CountyDao countyDao;
@@ -58,6 +60,11 @@ public class WeatherServiceImpl implements WeatherService {
 	public List<DayWeather> getAllDayWeather(County county) {
 		List<DayWeather> dayWeathers = dayWeatherDao.findByCounty(county);
 		return dayWeathers;
+	}
+
+	@Override
+	public County getDefaultCounty() {
+		return countyDao.findByWeatherCode(defaultCountyWeatherCode);
 	}
 
 }

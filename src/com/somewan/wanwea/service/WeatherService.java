@@ -8,6 +8,9 @@ import com.somewan.wanwea.domin.DayWeather;
 import com.somewan.wanwea.domin.Province;
 
 public interface WeatherService {
+	//获取默认县
+	public County getDefaultCounty();
+	
 	// 获取城市
 	public List<Province> getProvinces();
 
