@@ -13,12 +13,14 @@
 			<th align="left"><s:property value="county.getName()" /></th>
 			<th align="left">天气</th>
 			<th align="left">温度</th>
+			<!-- <th align="left">${requestScope.county.name}</th> -->
 		</tr>
 		<s:iterator value="dayWeathers" status="st">
 			<tr>
 				<td><s:property value="date" /></td>
 				<td><s:property value="weatherType.name" /></td>
 				<td><s:property value="temp" /></td>
+				<!--<td>${date}</td>  -->
 			</tr>
 		</s:iterator>
 	</table>
