@@ -53,7 +53,10 @@ public class BaseDaoHibernate4<T> implements BaseDao<T> {
 
 	// 删除实体
 	public void delete(T entity) {
-		getSessionFactory().getCurrentSession().delete(entity);
+		Session session = getSessionFactory().openSession();
+		session.delete(entity);
+		session.flush();
+		session.close();
 	}
 
 	// 根据ID删除实体

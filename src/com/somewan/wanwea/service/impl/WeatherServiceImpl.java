@@ -10,7 +10,7 @@ import com.somewan.wanwea.domin.Province;
 import com.somewan.wanwea.service.WeatherService;
 
 public class WeatherServiceImpl implements WeatherService {
-	private final String defaultCountyWeatherCode = "101010100";
+	private final String defaultCountyWeatherCode = "101121301";
 
 	private ProvinceDao provinceDao;
 	private CityDao cityDao;

@@ -48,8 +48,10 @@ public class HttpHelper {
 					// 只要不抛出异常，不管成功还是失败（比如服务器问题503），都交给用户处理
 					HttpEntity entity = httpResponse.getEntity();
 					String response = EntityUtils.toString(entity, "utf-8");
-					if (COUNT % 500 == 0) {
-						System.out.println("已处理" + COUNT + "个请求");
+					if (DebugHelper.getDebugState()) {
+						if (COUNT % 100 == 0) {
+							System.out.println("已处理" + COUNT + "个请求");
+						}
 					}
 					if (listener != null) {
 						listener.onFinish(response);

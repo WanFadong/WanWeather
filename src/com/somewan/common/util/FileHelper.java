@@ -1,10 +1,15 @@
 package com.somewan.common.util;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FileHelper {
 	private static int COUNT = 0;
@@ -36,5 +41,28 @@ public class FileHelper {
 			}
 		}
 
+	}
+
+	public static List<String> readLog(String fileName) {
+		List<String> logList = new ArrayList<String>();
+		BufferedReader reader = null;
+		try {
+			File file = new File(fileName);
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			String line = null;
+			while ((line = reader.readLine()) != null) {
+				logList.add(line);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				reader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return logList;
 	}
 }

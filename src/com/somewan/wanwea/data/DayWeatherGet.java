@@ -1,7 +1,5 @@
 package com.somewan.wanwea.data;
 
-import java.sql.Date;
-
 import com.somewan.common.util.DebugHelper;
 import com.somewan.common.util.FileHelper;
 import com.somewan.common.util.HttpCallbackListener;
@@ -20,6 +18,7 @@ import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 
 public class DayWeatherGet {
+	private final String fileName = "day_weather_init_error_log.txt";
 	private final String day_weather_url = "http://mobile.weather.com.cn/data/forecast/";
 	private ProvinceDao provinceDao;
 	private CityDao cityDao;
@@ -78,7 +77,11 @@ public class DayWeatherGet {
 						 */
 						DayWeather dayWeather = new DayWeather();
 						dayWeather.setTemp(Integer.valueOf(fc));
-						dayWeather.setDate(new Date(System.currentTimeMillis()));
+
+						java.util.Date date = new java.util.Date();
+						java.sql.Date sqlDate = new java.sql.Date(date.getTime() + i * 24 * 60 * 60 * 1000);
+						dayWeather.setDate(sqlDate);
+
 						County county = countyDao.findByWeatherCode(countyWeatherCode);
 						dayWeather.setCounty(county);
 						WeatherType weatherType = weatherTypeDao.findByCode(fa);
@@ -87,7 +90,6 @@ public class DayWeatherGet {
 					}
 
 				} catch (JSONException je) {
-					String fileName = "day_weather_init_log.txt";
 					String content = address + "不是Json数据";
 					FileHelper.writeLog(fileName, content);
 				} catch (Exception e) {

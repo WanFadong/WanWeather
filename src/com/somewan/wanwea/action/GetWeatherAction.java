@@ -30,16 +30,14 @@ public class GetWeatherAction extends ActionSupport {
 		return dayWeathers;
 	}
 
-	public void setDayWeathers(List<DayWeather> dayWeathers) {
-		this.dayWeathers = dayWeathers;
-	}
-
+	@Override
 	public String execute() {
 		if (county == null) {
 			// county默认值是北京
 			county = weatherService.getDefaultCounty();
 		}
-		setDayWeathers(weatherService.getAllDayWeather(county));
+		dayWeathers = weatherService.getAllDayWeather(county);
+		System.out.println(dayWeathers.size());
 		return SUCCESS;
 	}
 

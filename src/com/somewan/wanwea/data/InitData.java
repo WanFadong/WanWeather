@@ -13,12 +13,13 @@ public class InitData {
 	private ApplicationContext ctx;
 
 	public InitData() {
-		ctx = new ClassPathXmlApplicationContext("daoContext.xml", "applicationContext.xml");
+		ctx = new ClassPathXmlApplicationContext("daoContext.xml", "dataContext.xml");
 	}
 
 	public static void main(String[] args) {
 		InitData initData = new InitData();
 		initData.initDayWeather();
+		// initData.deletInvalidCounty();
 	}
 
 	private void initProvince() {
@@ -38,13 +39,13 @@ public class InitData {
 		DayWeatherGet dayWeatherGet = ctx.getBean("dayWeatherGet", DayWeatherGet.class);
 		List<County> counties = countyDao.findAll(County.class);
 		for (int i = 0; i < counties.size(); i++) {
-			if (DebugHelper.getDebugState()) {
-				if (i != 0 && i % 500 == 0) {
-					System.out.println("正在获取第" + i + "个县的天气");
-				}
-			}
 			String code = counties.get(i).getWeatherCode();
 			dayWeatherGet.getDayWeather(code);
 		}
+	}
+
+	private void deletInvalidCounty() {
+		CountyData countyData = ctx.getBean("countyData", CountyData.class);
+		countyData.deleteInvalidCounty();
 	}
 }

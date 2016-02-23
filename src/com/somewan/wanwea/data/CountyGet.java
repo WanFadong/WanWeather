@@ -12,12 +12,12 @@ import com.somewan.wanwea.domin.City;
 import com.somewan.wanwea.domin.County;
 
 public class CountyGet {
-	private final String county_url = "http://www.weather.com.cn/data/list3/city";
-	private ProvinceDao provinceDao;
-	private CityDao cityDao;
-	private CountyDao countyDao;
-	private DayWeatherDao dayWeatherDao;
-	private WeatherTypeDao weatherTypeDao;
+	protected final String county_url = "http://www.weather.com.cn/data/list3/city";
+	protected ProvinceDao provinceDao;
+	protected CityDao cityDao;
+	protected CountyDao countyDao;
+	protected DayWeatherDao dayWeatherDao;
+	protected WeatherTypeDao weatherTypeDao;
 
 	public void setDayWeatherDao(DayWeatherDao dayWeatherDao) {
 		this.dayWeatherDao = dayWeatherDao;
